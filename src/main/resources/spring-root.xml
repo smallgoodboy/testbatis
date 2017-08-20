@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans   xmlns="http://www.springframework.org/schema/beans"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    <bean id="testDao" class="com.ql.dao.TestDao">
+    <property name="sqlMapClientTemplate" ref="sqlMapClientTemplate"/>
+    </bean>
+
+    <bean id="sqlMapClientTemplate" class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+        <property name="sqlMapClient">
+            <bean class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+                <property name="dataSource">
+                    <bean class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+                        <property name="url" value="jdbc:mysql://localhost:3306/testll?serverTimezone=GMT"/>
+                        <property name="password" value="test"/>
+                        <property name="username" value="test"/>
+                    </bean>
+                </property>
+                <property name="configLocation" value="classpath:/sqlmap-config.xml">
+                </property>
+            </bean>
+        </property>
+    </bean>
+</beans>
